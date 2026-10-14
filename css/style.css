@@ -153,6 +153,7 @@ button { touch-action: manipulation; cursor: pointer; }
 .lv-desc { font-size: 14px; color: var(--muted); }
 .lv-mult { font-weight: 800; color: var(--primary-d); white-space: nowrap; }
 .lv-easy .lv-title { color: #2f9e6a; }
+.lv-mid .lv-title { color: #2b8fd6; }
 .lv-normal .lv-title { color: #d97706; }
 .lv-hard .lv-title { color: #d6336c; }
 

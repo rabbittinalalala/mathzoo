@@ -148,7 +148,7 @@
   function renderLevelSelect() {
     state.screen = 'level';
     var p = player();
-    var cards = ['easy', 'normal', 'hard'].map(function (id) {
+    var cards = Q.LEVEL_ORDER.map(function (id) {
       var L = Q.LEVELS[id];
       return '<button class="level-btn lv-' + id + (p.defaultLevel === id ? ' last' : '') + '" data-action="start" data-level="' + id + '">' +
         '<span class="lv-emoji">' + L.emoji + '</span>' +

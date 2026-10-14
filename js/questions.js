@@ -14,23 +14,31 @@
   //  carry ：加減法是否「必須」進位／退位
   //  mulMin/mulMax：乘法與除法使用的乘法表範圍
   //  multiplier：星星的難度倍率
+  //  twoDigit：家長模式開啟「2 位數 × 1 位數」後，這個難度是否會出現
+  //  LEVEL_ORDER：選難度畫面的排列順序
   var LEVELS = {
     easy: {
       id: 'easy', label: '簡單', emoji: '🌱', multiplier: 1,
       desc: '加減到 2 位數，乘除用 2～5 的乘法表',
-      addMax: 99, carry: false, mulMin: 2, mulMax: 5
+      addMax: 99, carry: false, mulMin: 2, mulMax: 5, twoDigit: false
+    },
+    mid: {
+      id: 'mid', label: '中等', emoji: '🌼', multiplier: 1.25,
+      desc: '加減到 2 位數，乘除用 4～9 的乘法表',
+      addMax: 99, carry: false, mulMin: 4, mulMax: 9, twoDigit: false
     },
     normal: {
       id: 'normal', label: '普通', emoji: '🌿', multiplier: 1.5,
       desc: '加減到 3 位數，乘除用 9×9 乘法表',
-      addMax: 999, carry: false, mulMin: 2, mulMax: 9
+      addMax: 999, carry: false, mulMin: 2, mulMax: 9, twoDigit: true
     },
     hard: {
       id: 'hard', label: '困難', emoji: '🌳', multiplier: 2,
       desc: '加減 3 位數且要進位／退位，乘除 9×9',
-      addMax: 999, carry: true, mulMin: 2, mulMax: 9
+      addMax: 999, carry: true, mulMin: 2, mulMax: 9, twoDigit: true
     }
   };
+  var LEVEL_ORDER = ['easy', 'mid', 'normal', 'hard'];
 
   // 是否有進位 / 退位（只要任一位數需要就算）
   function hasCarry(a, b) {
@@ -89,7 +97,7 @@
 
   function genMul(L, opts) {
     var a, b;
-    if (opts.twoDigitMul && L.id !== 'easy' && Math.random() < 0.5) {
+    if (opts.twoDigitMul && L.twoDigit && Math.random() < 0.5) {
       var r = twoDigitRange(L);
       var big = U.randInt(r[0], r[1]);
       var small = U.randInt(2, 9);
@@ -103,7 +111,7 @@
 
   function genDiv(L, opts) {
     var divisor, quotient;
-    if (opts.twoDigitMul && L.id !== 'easy' && Math.random() < 0.5) {
+    if (opts.twoDigitMul && L.twoDigit && Math.random() < 0.5) {
       var r = twoDigitRange(L);
       quotient = U.randInt(r[0], r[1]);
       divisor = U.randInt(2, 9);
@@ -156,6 +164,7 @@
 
   MZ.questions = {
     LEVELS: LEVELS,
+    LEVEL_ORDER: LEVEL_ORDER,
     OP_SYMBOL: OP_SYMBOL,
     OP_NAME: OP_NAME,
     generateRound: generateRound,

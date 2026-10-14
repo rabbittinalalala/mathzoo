@@ -151,7 +151,7 @@
     );
   }
 
-  var VALID_LEVELS = { easy: 1, normal: 1, hard: 1 };
+  var VALID_LEVELS = { easy: 1, mid: 1, normal: 1, hard: 1 };
   var VALID_OPS = { add: 1, sub: 1, mul: 1, div: 1 };
   var VALID_RESULTS = { first: 1, retry: 1, wrong: 1 };
 
